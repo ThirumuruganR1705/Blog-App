@@ -36,15 +36,13 @@ function Login() {
         })
         .then(() => {
           dispatch(authActions.login());
+          navigate("/");
         })
         .catch((e) => {
           console.log(e);
         })
         .then(setEmail(inputs.email))
-        .then(console.log("Created"))
-        .then(() => {
-          navigate("/");
-        });
+        // .then(console.log("Created"))
       let data = await res.data;
       console.log(data);
     } catch (e) {
@@ -61,12 +59,10 @@ function Login() {
         })
         .then(() => {
           dispatch(authActions.login());
+          navigate("/");
         })
         .catch((e) => {
           console.log(e);
-        })
-        .then(() => {
-          navigate("/");
         })
         .then(setEmail(inputs.email));
       let data = await res.data;

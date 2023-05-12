@@ -34,25 +34,21 @@ export let signup = async(req,res,next)=>{
         let hashedPassword = bcrypt.hashSync(password);
 
         let newUsers = new User({
-            username,
-            email,
+            username:username,
+            email:email,
             password:hashedPassword,
             blogs:[]
         });
-        try{
-            await newUsers.save();
-            console.log("Inserted");
-        }catch{(e)=>{
-            console.log(e);
-        }}
+        await newUsers.save();
+        console.log("Inserted");
     }
 };
 
 export let login = async(req,res,next) =>{
     let ExistingUser ;
-    // let {email,password} = req.body;
+    let {email,password} = req.body;
     try{
-        ExistingUser = await User.find();
+        ExistingUser = await User.findOne({email});
         console.log(ExistingUser);
     }catch{(e)=>{
         console.log(e);
@@ -87,16 +83,16 @@ export  let getUserId = async (req,res,next) =>{
 }
 
 export  let getUser = async (req,res,next) =>{
-    let userId;
+    let user;
     let {email} = req.body;
     try{
-        userId = await User.findOne({email});
+        user = await User.findOne({email}).populate("blogs");
         // console.log(userId);
     }catch{(e)=>{
         console.log(e);
     }}
-    if(userId){
-        return res.status(200).json({message:userId.blogs});
+    if(user){
+        return res.status(200).json({message:user.blogs});
     }else{
         return res.status(404).json({message:"not found"});
     }

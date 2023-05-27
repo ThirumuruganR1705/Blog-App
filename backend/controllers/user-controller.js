@@ -41,6 +41,7 @@ export let signup = async(req,res,next)=>{
         });
         await newUsers.save();
         console.log("Inserted");
+        return res.status(200).json({message:"signup Successfull"});
     }
 };
 

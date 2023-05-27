@@ -14,7 +14,7 @@ mongoose
 .connect(
   "mongodb+srv://admin:tle6WWx5szM6UbFy@cluster0.7slggme.mongodb.net/?retryWrites=true&w=majority"
 )
-.then(app.listen(4000))
+.then(app.listen(5000))
 .then(console.log("Database Connected And Running on Port Number 4000"))
 .catch((e) => {
   console.log(e);

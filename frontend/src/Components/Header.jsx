@@ -2,14 +2,27 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../Store";
-import $ from 'jquery'
+import $ from 'jquery';
+import { useContext } from "react";
+import newContext from "../Context/newContext";
 
 function Header() {
   let isLoggedIn = useSelector((state) => state.isloggedin);
-
   let dispatch = useDispatch();
+  let value = useContext(newContext);
+  let {email,setEmail,blogid,setBlogid} = value;
+
+
 
   let navigate = useNavigate();
+
+
+  const logoutFunction = ()=>{
+    dispatch(authActions.logout());
+    navigate("/");
+    setEmail("");
+    setBlogid("");
+  }
 
   $("document").ready(()=>{
     $(".menulogo").click(()=>{
@@ -31,7 +44,7 @@ function Header() {
 
 
   return (
-    <div className={window.location.pathname!=="/login"?"header h-20 bg-white flex items-center md:px-10 justify-between":"hidden"}>
+    <div className={window.location.pathname!=="/login"?"header h-20 bg-white flex items-center md:px-10 justify-between sticky":"hidden"}>
       {window.location.pathname!=="/login" && <div className="title font-sans font-bold text-2xl text-green-400">
         My Blog App
       </div>}
@@ -70,10 +83,7 @@ function Header() {
             Create Blog
           </a>
           <a
-            onClick={() => {
-              dispatch(authActions.logout());
-              navigate("/");
-            }}
+            onClick={logoutFunction}
             className="mx-2 px-1 border-2 border-white py-1 rounded-md bg-red-400 text-white cursor-pointer"
           >
             Log Out

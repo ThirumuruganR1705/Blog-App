@@ -9,7 +9,7 @@ import { useContext } from "react";
 import newContext from "../Context/newContext";
 function Login() {
   let value = useContext(newContext);
-  let [email, setEmail] = value;
+  let {email,setEmail,blogid,setBlogid} = value;
   let [regFlag, setRegFlag] = useState(false);
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -26,34 +26,44 @@ function Login() {
     }));
   };
 
-  let PostRequest = async () => {
-    try {
-      let res = await axios
-        .post("http://localhost:4000/api/user/signup", {
-          username: inputs.name,
-          email: inputs.email,
-          password: inputs.password,
-        })
-        .then(() => {
-          dispatch(authActions.login());
-          navigate("/");
-        })
-        .catch((e) => {
-          console.log(e);
-        })
-        .then(setEmail(inputs.email))
-        // .then(console.log("Created"))
-      let data = await res.data;
-      console.log(data);
-    } catch (e) {
-      console.log(e);
+  // let PostRequest = async () => {
+  //   try {
+  //     let res = await axios
+  //       .post("http://localhost:5000/api/user/signup", {
+  //         username: inputs.name,
+  //         email: inputs.email,
+  //         password: inputs.password,
+  //       })
+  //       console.log(res)
+  //       .then(setEmail(inputs.email))
+  //       // .then(console.log("Created"))
+  //     let data = await res.data;
+  //     console.log(data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  const PostRequest = async () => {
+    const res= await axios.post("http://localhost:5000/api/user/signup", {
+      username: inputs.name,
+      email: inputs.email,
+      password: inputs.password,
+    })
+    // console.log(res.status)
+    if(res.status === 200){
+      dispatch(authActions.login());
+      navigate("/");
+      setEmail(inputs.email);
     }
-  };
+    // else{
+    //   alert("error")
+    // }
+  }
 
   let LoginRequest = async () => {
     try {
       let res = await axios
-        .post("http://localhost:4000/api/user/login", {
+        .post("http://localhost:5000/api/user/login", {
           email: inputs.email,
           password: inputs.password,
         })
@@ -64,7 +74,10 @@ function Login() {
         .catch((e) => {
           console.log(e);
         })
-        .then(setEmail(inputs.email));
+        .then(()=>{
+          setEmail(inputs.email);
+          console.log("Email is saved");
+        });
       let data = await res.data;
       console.log(data);
     } catch (e) {

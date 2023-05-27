@@ -7,9 +7,11 @@ import newContext from "../Context/newContext";
 
 function BlogCreation() {
   let value = useContext(newContext);
-  let [email, setEmail] = value;
-
+  let {email,setEmail,blogid,setBlogid} = value;
+  console.log(value);
   console.log(email);
+
+  // console.log(email);
 
   let [inputs, setInputs] = useState({
     title: "",
@@ -26,14 +28,14 @@ function BlogCreation() {
 
   let submitHandler = async () => {
     console.log(inputs);
-    let userid = await axios.post("http://localhost:4000/api/user/finduser", {
+    let userid = await axios.post("http://localhost:5000/api/user/finduser", {
       email: email,
     });
     if (userid) {
       console.log(userid.data.message);
     }
     let res = await axios
-      .post("http://localhost:4000/api/blogs/create", {
+      .post("http://localhost:5000/api/blogs/create", {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
@@ -50,13 +52,13 @@ function BlogCreation() {
       <div className="">
         <div className="blogCreation flex flex-col items-center">
           <div>
-            <p className="text-xl p-5 ">Create New Blog</p>
+            <p className="text-xl p-5 font-bold text-green-500">CREATE NEW BLOG</p>
           </div>
-          <div className="inputs mx-1">
+          <div className="inputs mx-1  p-8 border">
             <div className="title">
               {/* <label className='text-xl' htmlFor="">Title</label> */}
               <input
-                className="border border-gray-300 focus:outline-green-500 my-3 p-1 rounded-md w-96  h-12"
+                className="border border-gray-300 focus:border-green-500 focus:outline-none my-3 p-1 text-green-500 focus:text-black  w-96  h-12"
                 type="text"
                 value={inputs.title}
                 name="title"
@@ -66,7 +68,7 @@ function BlogCreation() {
             </div>
             <div>
               <textarea
-                className="border border-gray-300 focus:outline-green-500 my-3 p-1 rounded-md w-96 h-40"
+                className="border border-gray-300 focus:border-green-500 focus:outline-none my-3 p-1 text-green-500 focus:text-black  w-96 h-40"
                 type="text"
                 value={inputs.description}
                 name="description"
@@ -76,7 +78,7 @@ function BlogCreation() {
             </div>
             <div className="">
               <input
-                className="border border-gray-300 focus:outline-green-500 my-3 p-1 rounded-md w-96 h-12"
+                className="border border-gray-300 focus:border-green-500 focus:outline-none focus:text-black my-3 p-1 text-green-500  w-96 h-12"
                 type="text"
                 value={inputs.image}
                 name="image"
@@ -86,10 +88,10 @@ function BlogCreation() {
             </div>
             <div className="btn flex justify-center items-center">
               <button
-                className="bg-green-400 text-white p-1 rounded-md md:hover:bg-green-500 "
+                className="bg-green-400 text-white py-2 px-3 font-bold  md:hover:bg-green-500 "
                 onClick={submitHandler}
               >
-                Create Blog
+                Save
               </button>
             </div>
           </div>

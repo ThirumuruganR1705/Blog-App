@@ -3,10 +3,12 @@ import img from "../Images/Blog.png";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
+import { useState } from "react";
 
 function Home() {
   let isLoggedIn = useSelector((state) => state.isloggedin);
   let navigate = useNavigate();
+
 
   let clickHandler = () => {
     if (isLoggedIn) {

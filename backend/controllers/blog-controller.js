@@ -21,10 +21,11 @@ export let getAllBlogs = async(req,res,next) =>{
 //Get Blogs By user id
 
 export let blogsById = async (req,res,next) =>{
+    console.log("Hi");
     let blogs;
-    let {userId} = req.body ;
+    let {blogid} = req.body ;
     try{
-        blogs = await blog.findById(userId).populate("user");
+        blogs = await blog.findById({_id:blogid}).populate("user");
     }catch{(e)=>{
         console.log(e);
     }};
@@ -77,14 +78,16 @@ export let createBlogs = async(req,res,next)=>{
 
 export let updateBlog = async(req,res,next) =>{
     let blogId = req.params.id;
-    let {title,description} =  req.body;
+    let {title,description,image} =  req.body;
     let newBlog = await blog.findByIdAndUpdate(blogId,{
         title,
-        description
+        description,
+        image
     });
     try{
         newBlog.save();
         console.log("Updated");
+        return res.status(200).json({message:"Updated"})
     }catch{(e)=>{
         console.log(e);
     }}
@@ -103,7 +106,7 @@ export let DeleteBlog = async(req,res,next) =>{
     // }}
     try{
         newBlog = await blog.find({id:blogId}).populate("user");
-        await blog.findByIdAndRemove(blogId);
+        await blog.deleteOne({_id:blogId});
         console.log(newBlog);
         await newBlog.user.blogs.pull(newBlog);
         await newBlog.user.save();

@@ -20,7 +20,7 @@ function AllBlogs() {
 
   let getBlogs = async () => {
     setIsLoading(true);
-    let res = await axios.get("http://localhost:5000/api/blogs").catch((e) => {
+    let res = await axios.get("https://blog-app-liim.onrender.com/api/blogs").catch((e) => {
       console.log(e);
     });
     console.log(res.data);

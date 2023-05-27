@@ -24,7 +24,7 @@ function MyBlogs() {
 
   let getmyBlogs = async () => {
     setIsLoading(true);
-    let data = await axios.post("http://localhost:5000/api/user/fuser", {
+    let data = await axios.post("https://blog-app-liim.onrender.com/api/user/fuser", {
       email,
     });
     console.log(data.data.message);

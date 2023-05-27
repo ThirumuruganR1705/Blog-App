@@ -63,7 +63,7 @@ function Login() {
   let LoginRequest = async () => {
     try {
       let res = await axios
-        .post("http://localhost:5000/api/user/login", {
+        .post("https://blog-app-liim.onrender.com/api/user/login", {
           email: inputs.email,
           password: inputs.password,
         })

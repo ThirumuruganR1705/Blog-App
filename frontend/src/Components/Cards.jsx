@@ -16,7 +16,7 @@ function Cards(props) {
   }
 
   const deleteHandler = async() =>{
-    const res = await axios.delete("http://localhost:5000/api/blogs/delete/"+props.id).then(()=>{
+    const res = await axios.delete("https://blog-app-liim.onrender.com/api/blogs/delete/"+props.id).then(()=>{
       console.log("deleted");
     })
     if(res.status===200){

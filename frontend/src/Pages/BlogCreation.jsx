@@ -28,14 +28,14 @@ function BlogCreation() {
 
   let submitHandler = async () => {
     console.log(inputs);
-    let userid = await axios.post("http://localhost:5000/api/user/finduser", {
+    let userid = await axios.post("https://blog-app-liim.onrender.com/api/user/finduser", {
       email: email,
     });
     if (userid) {
       console.log(userid.data.message);
     }
     let res = await axios
-      .post("http://localhost:5000/api/blogs/create", {
+      .post("https://blog-app-liim.onrender.com/api/blogs/create", {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,

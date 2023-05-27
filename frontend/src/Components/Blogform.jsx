@@ -44,14 +44,14 @@ function Blogform() {
 
   let submitHandler = async () => {
     console.log(inputs);
-    let userid = await axios.post("http://localhost:5000/api/user/finduser", {
+    let userid = await axios.post("https://blog-app-liim.onrender.com/api/user/finduser", {
       email: email,
     });
     if (userid) {
       console.log(userid.data.message);
     }
     let res = await axios
-      .put("http://localhost:5000/api/blogs/update/" + blogid, {
+      .put("https://blog-app-liim.onrender.com/api/blogs/update/" + blogid, {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,

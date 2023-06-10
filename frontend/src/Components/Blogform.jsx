@@ -17,7 +17,7 @@ function Blogform() {
 
   useEffect(() => {
     const res = axios
-      .post("http://localhost:5000/api/blogs/findbyid", { blogid })
+      .post("https://blog-app-liim.onrender.com/api/blogs/findbyid", { blogid })
       .then((data) => {
         console.log(data.data.message);
         setInputs({

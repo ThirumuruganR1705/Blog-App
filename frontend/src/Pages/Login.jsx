@@ -44,7 +44,7 @@ function Login() {
   //   }
   // };
   const PostRequest = async () => {
-    const res= await axios.post("http://localhost:5000/api/user/signup", {
+    const res= await axios.post("https://blog-app-liim.onrender.com/api/user/login", {
       username: inputs.name,
       email: inputs.email,
       password: inputs.password,

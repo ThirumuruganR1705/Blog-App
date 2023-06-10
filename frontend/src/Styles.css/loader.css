@@ -14,3 +14,12 @@
     border-radius: 50%;
     animation: spinner 1.5s linear infinite;
   }
+
+  .loading-spinner1 {
+    width: 30px;
+    height: 30px;
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #69bf71; /* Black */
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+  }

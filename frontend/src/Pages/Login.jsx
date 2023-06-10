@@ -9,8 +9,9 @@ import { useContext } from "react";
 import newContext from "../Context/newContext";
 function Login() {
   let value = useContext(newContext);
-  let {email,setEmail,blogid,setBlogid} = value;
+  let { email, setEmail, blogid, setBlogid } = value;
   let [regFlag, setRegFlag] = useState(false);
+  let [spinFlag, setSpinFlag] = useState(false);
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let [inputs, setInputs] = useState({
@@ -26,41 +27,26 @@ function Login() {
     }));
   };
 
-  // let PostRequest = async () => {
-  //   try {
-  //     let res = await axios
-  //       .post("http://localhost:5000/api/user/signup", {
-  //         username: inputs.name,
-  //         email: inputs.email,
-  //         password: inputs.password,
-  //       })
-  //       console.log(res)
-  //       .then(setEmail(inputs.email))
-  //       // .then(console.log("Created"))
-  //     let data = await res.data;
-  //     console.log(data);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
   const PostRequest = async () => {
-    const res= await axios.post("https://blog-app-liim.onrender.com/api/user/login", {
-      username: inputs.name,
-      email: inputs.email,
-      password: inputs.password,
-    })
-    // console.log(res.status)
-    if(res.status === 200){
+    setSpinFlag(true);
+    const res = await axios.post(
+      "https://blog-app-liim.onrender.com/api/user/login",
+      {
+        username: inputs.name,
+        email: inputs.email,
+        password: inputs.password,
+      }
+    );
+    if (res.status === 200) {
       dispatch(authActions.login());
       navigate("/");
       setEmail(inputs.email);
+      setSpinFlag(false);
     }
-    // else{
-    //   alert("error")
-    // }
-  }
+  };
 
   let LoginRequest = async () => {
+    setSpinFlag(true);
     try {
       let res = await axios
         .post("https://blog-app-liim.onrender.com/api/user/login", {
@@ -74,12 +60,13 @@ function Login() {
         .catch((e) => {
           console.log(e);
         })
-        .then(()=>{
+        .then(() => {
           setEmail(inputs.email);
           console.log("Email is saved");
         });
       let data = await res.data;
       console.log(data);
+      setSpinFlag(false);
     } catch (e) {
       console.log(e);
     }
@@ -100,6 +87,13 @@ function Login() {
   return (
     <React.Fragment>
       <div className="">
+        {/* {spinFlag && (
+          <div className="absolute h-screen w-screen bg-white flex items-center justify-center">
+            <div className="spinner-container">
+              <div className="loading-spinner"></div>
+            </div>
+          </div>
+        )} */}
         <div className="flex justify-center items-center bg-green-200 h-screen">
           <div className="w-80 h-80 bg-white shadow-md rounded-md">
             <div className="title text-center pt-2 mt-5 pb-2 text-green-600 font-extrabold">
@@ -146,10 +140,17 @@ function Login() {
                 )}
                 {!regFlag && (
                   <button
-                    className="bg-green-400 py-2 px-3 text-white hover:bg-green-600"
+                    className={spinFlag?"bg-green-400 py-2 px-3 text-white flex gap-3":"bg-green-400 py-2 px-3 text-white hover:bg-green-600 flex gap-3"}
                     onClick={postFunc}
                   >
                     Login
+                    {spinFlag && (
+                      <div>
+                        <div className="spinner-container ">
+                          <div className="loading-spinner1"></div>
+                        </div>
+                      </div>
+                    )}
                   </button>
                 )}
               </div>

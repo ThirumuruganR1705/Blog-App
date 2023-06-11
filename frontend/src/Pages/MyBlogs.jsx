@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Cards from "../Components/Cards";
 import Header from "../Components/Header";
 import newContext from "../Context/newContext";
 import "../Styles.css/loader.css";
 
 function MyBlogs() {
+  let navigator = useNavigate();
   let value = useContext(newContext);
   let { email, setEmail, blogid, setBlogid } = value;
   let [myblogs, setMyblogs] = useState([]);
@@ -51,7 +53,7 @@ function MyBlogs() {
         <div className="title">{/* <p className="text-xl">My Blogs</p> */}</div>
         <div
           className={
-            isLoading ? "h-full flex justify-center items-center" : "myblogs "
+            isLoading ? "h-full flex justify-center items-center " : "myblogs "
           }
         >
           {isLoading && (
@@ -78,12 +80,12 @@ function MyBlogs() {
               })}
             </div>
           )}
-          {myblogs.length == 0 && (
+          {myblogs.length == 0 && !isLoading && (
             <div>
               <div className="flex justify-center">
                 <p>No Blogs Here.</p>
               </div>
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-4" onClick={()=>{navigator("/createblog")}}>
                 <button className="bg-green-400 text-white px-2 py-1 rounded-md flex gap-1">
                   Create New Blog
                   <svg

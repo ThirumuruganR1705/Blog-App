@@ -44,7 +44,7 @@ function Header() {
 
 
   return (
-    <div className={window.location.pathname!=="/login"?"header h-20 bg-white flex items-center md:px-10 justify-between sticky":"hidden"}>
+    <div className={window.location.pathname!=="/login"?"w-320p header h-20 bg-white flex items-center md:px-10 justify-between md:justify-between ":"hidden"}>
       {window.location.pathname!=="/login" && <div className="title font-sans font-bold text-2xl text-green-400">
         My Blog App
       </div>}
@@ -100,7 +100,7 @@ function Header() {
           </div>
           <div className="menu-items hidden absolute text-center top-0 left-0 z-10 flex flex-col w-screen h-screen bg-green-400 ">
             <div className="closer mt-2 mb-2">
-              <a className="text-white bg-red-400 px-2 rounded-full float-right mr-2">X</a>
+              <a className="text-white bg-red-400 px-3 py-1 rounded-full float-right mr-2">X</a>
             </div>
             <div className="mb-2 mt-12">
             <a

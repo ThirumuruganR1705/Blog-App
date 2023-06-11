@@ -40,7 +40,7 @@ function AllBlogs() {
       <div className={isLoading?"":"grid-start-1 grid-end-2"}>
         <Header />
       </div>
-      <div className={isLoading?"h-1/2 flex justify-center items-center":" grid grid-cols-3 lg:mx-40 md:mx-10 my-10 "}>
+      <div className={isLoading?"h-1/2 flex justify-center items-center":" grid md:grid-cols-3 grid-cols-1 gap-y-2 lg:mx-40 md:mx-10 my-10 p-2 "}>
         {isLoading && (
           <div>
             <div className="spinner-container">

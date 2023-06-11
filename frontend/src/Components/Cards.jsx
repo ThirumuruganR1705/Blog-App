@@ -66,11 +66,11 @@ function Cards(props) {
     // </div>
   
 
-    <div className="h-[30rem] w-96 relative  border border-gray-700 shadow  flex flex-col justify-between  ">
+    <div className="md:h-[30rem] md:w-96 w-full relative  border border-gray-700 shadow  flex flex-col justify-between  ">
       <div className="flex justify-center">
-        <img className="h-[15rem] w-96" src={props.image} alt="" />
+        <img className="h-[15rem] md:w-96 w-full" src={props.image} alt="" />
       </div>
-      <div className=" h-[15rem] overflow-hidden overflow-ellipsis ">
+      <div className=" md:h-[15rem] overflow-hidden overflow-ellipsis ">
         <div className="font-bold text-lg text-green-500 text-center pt-3">
           {props.title}
         </div>

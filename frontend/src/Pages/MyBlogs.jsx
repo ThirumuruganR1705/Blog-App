@@ -40,15 +40,15 @@ function MyBlogs() {
   console.log(typeof(myblogs.length));
 
   return (
-    <div className="h-screen">
-      <Header />
+    <div className="h-screen w-screen">
+      <div className="w-full"><Header /></div>
       <div className={isLoading ? "h-3/5" : "myBlogs"}>
         <div className="title">{/* <p className="text-xl">My Blogs</p> */}</div>
         <div
           className={
             isLoading
               ? "h-full flex justify-center items-center"
-              : "myblogs md:mx-48 m-10  gap-x-8 grid grid-cols-3 md:grid-cols-3 grid-cols-1"
+              : "myblogs "
           }
         >
           {isLoading && (
@@ -58,7 +58,7 @@ function MyBlogs() {
               </div>
             </div>
           )}
-          {myblogs.length>0 && <div>
+          {myblogs.length>0 && <div className="md:mx-48 md:m-10 gap-y-2  md:gap-x-8 grid md:grid-cols-3 grid-cols-1 p-2">
             {myblogs.map((arr) => {
               return (
                 <div>

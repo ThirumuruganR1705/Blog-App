@@ -15,6 +15,8 @@
     animation: spinner 1.5s linear infinite;
   }
 
+  /* For Login Page */
+
   .loading-spinner1 {
     width: 30px;
     height: 30px;

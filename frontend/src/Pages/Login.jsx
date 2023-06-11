@@ -132,15 +132,26 @@ function Login() {
               <div className="btn flex justify-center mt-3">
                 {regFlag && (
                   <button
-                    className="bg-green-400 py-2 px-3 text-white hover:bg-green-600"
+                    className="bg-green-400 py-2 px-3 text-white hover:bg-green-600 flex gap-3"
                     onClick={PostRequest}
                   >
                     Create
+                    {spinFlag && (
+                      <div>
+                        <div className="spinner-container ">
+                          <div className="loading-spinner1"></div>
+                        </div>
+                      </div>
+                    )}
                   </button>
                 )}
                 {!regFlag && (
                   <button
-                    className={spinFlag?"bg-green-400 py-2 px-3 text-white flex gap-3":"bg-green-400 py-2 px-3 text-white hover:bg-green-600 flex gap-3"}
+                    className={
+                      spinFlag
+                        ? "bg-green-400 py-2 px-3 text-white flex gap-3"
+                        : "bg-green-400 py-2 px-3 text-white hover:bg-green-600 flex gap-3"
+                    }
                     onClick={postFunc}
                   >
                     Login
@@ -162,6 +173,7 @@ function Login() {
                       className="text-green-500 cursor-pointer hover:text-green-600"
                       onClick={() => {
                         setRegFlag(false);
+                        setSpinFlag(false);
                       }}
                     >
                       Login Here.
@@ -175,6 +187,7 @@ function Login() {
                       className="text-green-500 cursor-pointer hover:text-green-600"
                       onClick={() => {
                         setRegFlag(true);
+                        setSpinFlag(false);
                       }}
                     >
                       Register Here.

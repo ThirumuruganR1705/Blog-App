@@ -30,7 +30,7 @@ function Login() {
   const PostRequest = async () => {
     setSpinFlag(true);
     const res = await axios.post(
-      "https://blog-app-liim.onrender.com/api/user/login",
+      "https://blog-app-liim.onrender.com/api/user/signup",
       {
         username: inputs.name,
         email: inputs.email,

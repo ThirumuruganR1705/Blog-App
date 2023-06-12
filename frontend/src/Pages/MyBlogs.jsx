@@ -64,7 +64,7 @@ function MyBlogs() {
             </div>
           )}
           {myblogs.length > 0 && (
-            <div className="md:mx-48 md:m-10 gap-y-2  md:gap-x-8 grid md:grid-cols-3 grid-cols-1 p-2">
+            <div className="md:mx-48 md:m-10 gap-y-3  md:gap-x-8 grid md:grid-cols-3 grid-cols-1 p-4">
               {myblogs.map((arr) => {
                 return (
                   <div>

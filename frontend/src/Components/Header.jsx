@@ -96,11 +96,11 @@ function Header() {
       {isLoggedIn && (
         <div className="menu block md:hidden">
           <div className="menulogo text-white mr-2">
-            <i className="fa-solid fa-bars text-green-400"></i>
+            <i className="fa-solid fa-bars text-green-400 text-2xl"></i>
           </div>
           <div className="menu-items hidden absolute text-center top-0 left-0 z-10 flex flex-col w-screen h-screen bg-green-400 ">
             <div className="closer mt-2 mb-2">
-              <a className="text-white bg-red-400 px-3 py-1 rounded-full float-right mr-2">X</a>
+              <a className="text-white bg-red-400 px-2 py-1 rounded-full float-right mr-2">X</a>
             </div>
             <div className="mb-2 mt-12">
             <a

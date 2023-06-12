@@ -31,44 +31,10 @@ function Cards(props) {
   }
 
   return (
-    // <div className=" w-full lg:flex md:w my-5 ">
-    //   <div className="h-48 lg:h-auto lg:w-48 md:w-full flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" title="Mountain">
-    //     <img src={props.image} className="h-full md:w-full" alt="" />
-    //   </div>
-    //   <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-    //     <div className="mb-8">
-    //       <div className="text-gray-900 font-bold text-xl mb-2">{props.title}</div>
-    //       <p className="text-gray-700 text-base">{props.desc}</p>
-    //     </div>
-    //     <div className="flex items-center">
-    //       {props.username && <div className="">
-    //         <p className=" text-sm bg-green-400 p-1 text-white rounded-lg">@{props.username}</p>
-    //       </div>}
-    //     </div>
-    //   </div>
-    // </div>
-
-    // <div className="w-full lg:h-40  md:h-60 border  flex sm:flex-row flex-col justify-center items-center gap-4">
-    //   <div className="">
-    //     <img src={props.image} alt={props.title} className="lg:h-40 md:h-60 w-full" />
-    //   </div>
-    //   <div className="">
-    //     <div className="font-bold text-green-500 mb-3 text-lg">
-    //       <span>{props.title}</span>
-    //     </div>
-    //     <div className="text-sm">
-    //       <span>{props.desc}</span>
-    //     </div>
-    //     <div className="my-5  pb-5">
-    //       <span className="bg-red-300 p-1 float-right text-white mr-5 ">@{props.username}</span>
-    //     </div>
-    //   </div>
-    // </div>
   
-
-    <div className="md:h-[30rem] md:w-96 w-full relative  border border-gray-700 shadow  flex flex-col justify-between  ">
+    <div className="md:h-[30rem] md:w-96 w-full relative  shadow-2xl rounded-md  flex flex-col justify-between  ">
       <div className="flex justify-center">
-        <img className="h-[15rem] md:w-96 w-full" src={props.image} alt="" />
+        <img className="h-[15rem] md:w-96 w-full rounded-t-md" src={props.image} alt="" />
       </div>
       <div className=" md:h-[15rem] overflow-hidden overflow-ellipsis ">
         <div className="font-bold text-lg text-green-500 text-center pt-3">

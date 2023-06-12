@@ -83,7 +83,7 @@ function MyBlogs() {
           {myblogs.length == 0 && !isLoading && (
             <div>
               <div className="flex justify-center">
-                <p>No Blogs Here.</p>
+                <p>No Blogs Created By You.</p>
               </div>
               <div className="flex justify-center mt-4" onClick={()=>{navigator("/createblog")}}>
                 <button className="bg-green-400 text-white px-2 py-1 rounded-md flex gap-1">

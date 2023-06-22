@@ -4,17 +4,21 @@ import { useContext, useRef } from "react";
 import { useState } from "react";
 import Header from "../Components/Header";
 import newContext from "../Context/newContext";
-import {getDownloadURL, ref,uploadBytesResumable} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { ProgressBar } from 'react-loader-spinner'
 
 function BlogCreation() {
   let value = useContext(newContext);
+  const [loader, setLoader] = useState(false);
   let { email, setEmail, blogid, setBlogid } = value;
   const [file, setFile] = useState({});
   const inputref = useRef();
+  const navigator = useNavigate();
   console.log(value);
   console.log(email);
-  
+
 
   // console.log(email);
 
@@ -27,17 +31,17 @@ function BlogCreation() {
 
   let imageChangeHandler = async (e) => {
     inputref.current.disabled = true;
-    setFile((prevState)=>{
-      return {file:e.target.files[0]}
+    setFile((prevState) => {
+      return { file: e.target.files[0] }
     })
     console.log(e.target.files[0]);
     const storageRef = ref(storage, "/files/" + e.target.files[0].name);
     const uploadTask = uploadBytesResumable(storageRef, e.target.files[0]);
     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
       console.log(url);
-      setInputs({...inputs, image:url});
+      setInputs({ ...inputs, image: url });
     });
-    
+
   }
 
   let changeHandler = (e) => {
@@ -49,9 +53,10 @@ function BlogCreation() {
 
   let submitHandler = async () => {
     console.log(inputs);
+    setLoader(true);
     let userid = await axios.post("https://blog-app-liim.onrender.com/api/user/finduser", {
       email: email,
-    }).catch((e)=>{console.log(e)})
+    }).catch((e) => { console.log(e) })
     if (userid) {
       console.log(userid.data.message);
     }
@@ -60,9 +65,11 @@ function BlogCreation() {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
-        user: userid.data.message,
+        user: userid.data.message, 
       })
       .then(console.log("Blog Is Created"));
+    setLoader(false);
+    navigator("/blogs");
   };
 
   return (
@@ -70,7 +77,7 @@ function BlogCreation() {
       <div className="">
         <Header />
       </div>
-      <div className="">
+      {!loader && <div className="">
         <div className="blogCreation flex flex-col items-center">
           <div>
             <p className="text-xl p-5 font-bold text-green-500">CREATE NEW BLOG</p>
@@ -122,7 +129,20 @@ function BlogCreation() {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
+      {loader &&
+        <div className="flex justify-center items-center h-[70vh]">
+          <ProgressBar
+            height="80"
+            width="80"
+            ariaLabel="progress-bar-loading"
+            wrapperStyle={{}}
+            wrapperClass="progress-bar-wrapper"
+            borderColor='#ebf5ec'
+            barColor='#4be35d'
+          />
+        </div>
+      }
     </div>
   );
 }

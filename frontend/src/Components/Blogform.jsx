@@ -57,9 +57,9 @@ function Blogform() {
         image: inputs.image,
         user: userid.data.message,
       });
-      if(res.status===200){
-        navigate("/myBlogs");
-      }
+    if (res.status === 200) {
+      navigate("/myBlogs");
+    }
   };
 
   return (

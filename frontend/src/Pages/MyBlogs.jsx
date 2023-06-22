@@ -1,12 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
+import React, { useState, useContext , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import Cards from "../Components/Cards";
 import Header from "../Components/Header";
 import newContext from "../Context/newContext";
 import "../Styles.css/loader.css";
+import {useMemo} from "react";
 
 function MyBlogs() {
   let navigator = useNavigate();
@@ -37,6 +36,8 @@ function MyBlogs() {
     setIsLoading(false);
   };
 
+  const memo = useMemo(()=>getmyBlogs,[email])
+
   if (loadFlag) {
     getmyBlogs();
     setLoadFlag(false);
@@ -64,10 +65,10 @@ function MyBlogs() {
             </div>
           )}
           {myblogs.length > 0 && (
-            <div className="md:mx-48 md:m-10 gap-y-3  md:gap-x-8 grid md:grid-cols-3 grid-cols-1 p-4">
+            <div className="md:mx-40 md:m-10 gap-y-3  md:gap-x-3 grid md:grid-cols-3 grid-cols-1 p-4">
               {myblogs.map((arr) => {
                 return (
-                  <div>
+                  <div className="">
                     <Cards
                       title={arr.title}
                       desc={arr.description}
@@ -112,4 +113,4 @@ function MyBlogs() {
   );
 }
 
-export default MyBlogs;
+export default React.memo(MyBlogs);

@@ -99,27 +99,13 @@ export let DeleteBlog = async(req,res,next) =>{
     let blogId = req.params.id;
     let newBlog;
     let ExistingUser;
-    // try{
-    //     ExistingUser = await User.findById(blogId);
-    // }catch{(e)=>{
-    //     console.log(e);
-    // }}
     try{
         newBlog = await blog.find({id:blogId}).populate("user");
         await blog.deleteOne({_id:blogId});
         console.log(newBlog);
         await newBlog.user.blogs.pull(newBlog);
         await newBlog.user.save();
-        // ExistingUser = await User.find({blogs:blogId});
-        // let session = await mongoose.startSession();
-        // session.startTransaction();
-        // newBlog = await blog.findByIdAndRemove(blogId); 
-        // console.log(ExistingUser);
-        // await ExistingUser.blogs;
-        // await ExistingUser.save({session});
-        // await session.commitTransaction();
         return res.status(200).json({message:"Successfully Deleted"});
-        // console.log("Deleted");
     }catch{(e)=>{
         console.log(e);
     }}

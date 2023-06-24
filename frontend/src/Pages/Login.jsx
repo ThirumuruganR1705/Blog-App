@@ -7,11 +7,13 @@ import { authActions } from "../Store";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import newContext from "../Context/newContext";
+import { useCookies } from "react-cookie";
 function Login() {
   let value = useContext(newContext);
   let { email, setEmail, blogid, setBlogid } = value;
   let [regFlag, setRegFlag] = useState(false);
   let [spinFlag, setSpinFlag] = useState(false);
+  const [cookie, setCookie,removeCookie] = useCookies(['user']);
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let [inputs, setInputs] = useState({
@@ -38,6 +40,8 @@ function Login() {
       }
     );
     if (res.status === 200) {
+      setCookie('pass', inputs.password, { path: "/" });
+      setCookie('email', inputs.email, { path: "/" });
       dispatch(authActions.login());
       navigate("/");
       setEmail(inputs.email);
@@ -54,6 +58,8 @@ function Login() {
           password: inputs.password,
         })
         .then(() => {
+          setCookie('pass', inputs.password, { path: "/" });
+          setCookie('email', inputs.email, { path: "/" });
           dispatch(authActions.login());
           navigate("/");
         })

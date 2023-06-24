@@ -5,12 +5,14 @@ import { authActions } from "../Store";
 import $ from 'jquery';
 import { useContext } from "react";
 import newContext from "../Context/newContext";
+import {useCookies} from 'react-cookie';
 
 function Header() {
   let isLoggedIn = useSelector((state) => state.isloggedin);
   let dispatch = useDispatch();
   let value = useContext(newContext);
   let {email,setEmail,blogid,setBlogid} = value;
+  const [cookie, setCookie,removeCookie] = useCookies(['user']);
 
 
 
@@ -18,6 +20,8 @@ function Header() {
 
 
   const logoutFunction = ()=>{
+    setCookie('email',null,{path:"/"});
+    setCookie('pass',null,{path:"/"});
     dispatch(authActions.logout());
     navigate("/");
     setEmail("");
@@ -145,8 +149,7 @@ function Header() {
             <div className="mb-2">
             <a
               onClick={() => {
-                dispatch(authActions.logout());
-                navigate("/")
+                logoutFunction()
               }}
               className="mx-2 px-1 border-white py-1 rounded-md text-white hover:bg-white hover:text-green-500 cursor-pointer closer-menu"
             >

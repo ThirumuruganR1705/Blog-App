@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import Header from "../Components/Header";
 import newContext from "../Context/newContext";
 
 function Blogform() {
@@ -13,20 +12,16 @@ function Blogform() {
   let { email, setEmail, blogid, setBlogid } = value;
   const navigate = useNavigate();
 
-  // console.log(value);
-
   useEffect(() => {
     const res = axios
       .post("https://blog-app-liim.onrender.com/api/blogs/findbyid", { blogid })
       .then((data) => {
-        console.log(data.data.message);
         setInputs({
           title: data.data.message.title,
           description: data.data.message.description,
           image: data.data.message.image,
         });
       });
-    // console.log(res.message);
   }, []);
 
   let [inputs, setInputs] = useState({
@@ -43,13 +38,9 @@ function Blogform() {
   };
 
   let submitHandler = async () => {
-    console.log(inputs);
     let userid = await axios.post("https://blog-app-liim.onrender.com/api/user/finduser", {
       email: email,
     });
-    if (userid) {
-      console.log(userid.data.message);
-    }
     let res = await axios
       .put("https://blog-app-liim.onrender.com/api/blogs/update/" + blogid, {
         title: inputs.title,
@@ -65,14 +56,8 @@ function Blogform() {
   return (
     <div className="">
       <div className="blogCreation flex flex-col items-center">
-        <div>
-          <p className="text-xl p-5 font-bold text-green-500">
-            {/* CREATE NEW BLOG */}
-          </p>
-        </div>
         <div className="inputs mx-1  p-8 border">
           <div className="title">
-            {/* <label className='text-xl' htmlFor="">Title</label> */}
             <input
               className="border border-gray-300 focus:border-green-500 focus:outline-none my-3 p-1 text-green-500 focus:text-black  w-96  h-12"
               type="text"

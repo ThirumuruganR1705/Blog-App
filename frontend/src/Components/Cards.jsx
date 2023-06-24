@@ -8,22 +8,15 @@ function Cards(props) {
 
   let value = useContext(newContext);
   let { email, setEmail, blogid, setBlogid } = value;
-
   const navigate = useNavigate();
-
-  if (props.id) {
-    console.log(props.id);
-  }
 
   const deleteHandler = async () => {
     const res = await axios.delete("https://blog-app-liim.onrender.com/api/blogs/delete/" + props.id);
-    console.log("hhh");
     navigate("/blogs");
   }
 
   const editHandler = (e) => {
     setBlogid(e.target.value);
-    console.log("blogid is saved");
     navigate("/editblog");
   }
 
@@ -88,13 +81,13 @@ function Cards(props) {
       </div>
       <div className="hidden md:flex flex justify-center mb-5">
         <div className="w-[60rem] h-[18rem] flex shadow-xl ">
-            <div className="w-[17rem] h-[18rem] ">
-              <img src={props.image} className="w-[17rem] h-[18rem]"/>
-            </div>
-            <div className="w-[43rem] p-5 relative">
-              <div className="text-center p-2 text-green-400">{props.title}</div>
-              <div className="leading-7">{props.desc}</div>
-              {props.username &&<div>
+          <div className="w-[17rem] h-[18rem] ">
+            <img src={props.image} className="w-[17rem] h-[18rem]" />
+          </div>
+          <div className="w-[43rem] p-5 relative">
+            <div className="text-center p-2 text-green-400">{props.title}</div>
+            <div className="leading-7">{props.desc}</div>
+            {props.username && <div>
               <p className="right-1 bottom-1 absolute bg-green-400 text-white px-2 py-1">@{props.username}</p>
             </div>}
             {!props.username && <div className="flex absolute bottom-1 gap-2 right-1 text-white">
@@ -133,8 +126,8 @@ function Cards(props) {
                 Delete
               </button>
             </div>}
-            </div>
-            
+          </div>
+
         </div>
       </div>
     </div>

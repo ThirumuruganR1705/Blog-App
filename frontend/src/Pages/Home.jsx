@@ -3,7 +3,6 @@ import img from "../Images/Blog.png";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
-import { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -12,19 +11,16 @@ import { useContext } from "react";
 import newContext from "../Context/newContext";
 import { useEffect } from "react";
 
-
 function Home() {
   let isLoggedIn = useSelector((state) => state.isloggedin);
-  const [cookie, setCookie,removeCookie] = useCookies(['user']);
+  const [cookie, setCookie, removeCookie] = useCookies(['user']);
   let navigate = useNavigate();
   const dispatch = useDispatch();
   let value = useContext(newContext);
   let { email, setEmail, blogid, setBlogid } = value;
 
-  console.log(cookie.email);
-
   useEffect(() => {
-    if (cookie.email!=null && cookie.pass!=null && !isLoggedIn) {
+    if (cookie.email != null && cookie.pass != null && !isLoggedIn) {
       try {
         let res = axios
           .post("https://blog-app-liim.onrender.com/api/user/login", {
@@ -40,25 +36,20 @@ function Home() {
           })
           .then(() => {
             setEmail(cookie.email);
-            console.log("Email is saved");
           });
         let data = res.data;
-        console.log(data);
       } catch (e) {
         console.log(e);
       }
     }
   }, [])
 
-
   let clickHandler = () => {
     if (isLoggedIn) {
-      // window.location.assign("/allblogs");
       navigate("/blogs");
     } else {
       navigate("/login");
     }
-
   };
 
   return (

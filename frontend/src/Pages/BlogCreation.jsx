@@ -19,15 +19,11 @@ function BlogCreation() {
   console.log(value);
   console.log(email);
 
-
-  // console.log(email);
-
   let [inputs, setInputs] = useState({
     title: "",
     description: "",
     image: "",
   });
-  console.log(inputs);
 
   let imageChangeHandler = async (e) => {
     inputref.current.disabled = true;
@@ -41,7 +37,6 @@ function BlogCreation() {
       console.log(url);
       setInputs({ ...inputs, image: url });
     });
-
   }
 
   let changeHandler = (e) => {
@@ -65,7 +60,7 @@ function BlogCreation() {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
-        user: userid.data.message, 
+        user: userid.data.message,
       })
       .then(console.log("Blog Is Created"));
     setLoader(false);
@@ -84,7 +79,6 @@ function BlogCreation() {
           </div>
           <div className="inputs mx-1  p-8 border">
             <div className="title">
-              {/* <label className='text-xl' htmlFor="">Title</label> */}
               <input
                 className="border border-gray-300 focus:border-green-500 focus:outline-none my-3 p-1 text-green-500 focus:text-black  w-96  h-12"
                 type="text"

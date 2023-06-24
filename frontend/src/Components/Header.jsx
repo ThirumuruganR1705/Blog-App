@@ -5,51 +5,46 @@ import { authActions } from "../Store";
 import $ from 'jquery';
 import { useContext } from "react";
 import newContext from "../Context/newContext";
-import {useCookies} from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 function Header() {
   let isLoggedIn = useSelector((state) => state.isloggedin);
   let dispatch = useDispatch();
   let value = useContext(newContext);
-  let {email,setEmail,blogid,setBlogid} = value;
-  const [cookie, setCookie,removeCookie] = useCookies(['user']);
-
-
-
+  let { email, setEmail, blogid, setBlogid } = value;
+  const [cookie, setCookie, removeCookie] = useCookies(['user']);
   let navigate = useNavigate();
 
-
-  const logoutFunction = ()=>{
-    setCookie('email',null,{path:"/"});
-    setCookie('pass',null,{path:"/"});
+  const logoutFunction = () => {
+    setCookie('email', null, { path: "/" });
+    setCookie('pass', null, { path: "/" });
     dispatch(authActions.logout());
     navigate("/");
     setEmail("");
     setBlogid("");
   }
 
-  $("document").ready(()=>{
-    $(".menulogo").click(()=>{
+  $("document").ready(() => {
+    $(".menulogo").click(() => {
       $(".menu-items").show();
     })
   });
 
-  $("document").ready(()=>{
-    $(".closer").click(()=>{
+  $("document").ready(() => {
+    $(".closer").click(() => {
       $(".menu-items").hide();
     })
   });
 
-  $("document").ready(()=>{
-    $(".closer-menu").click(()=>{
+  $("document").ready(() => {
+    $(".closer-menu").click(() => {
       $(".menu-items").hide();
     })
   })
 
-
   return (
-    <div className={window.location.pathname!=="/login"?"w-320p header h-20 bg-white flex items-center md:px-10 justify-between md:justify-between ":"hidden"}>
-      {window.location.pathname!=="/login" && <div className="title font-sans font-bold text-2xl text-green-400">
+    <div className={window.location.pathname !== "/login" ? "w-320p header h-20 bg-white flex items-center md:px-10 justify-between md:justify-between " : "hidden"}>
+      {window.location.pathname !== "/login" && <div className="title font-sans font-bold text-2xl text-green-400">
         My Blog App
       </div>}
       {isLoggedIn && (
@@ -58,7 +53,7 @@ function Header() {
             onClick={() => {
               navigate("/");
             }}
-            className={window.location.pathname=="/"?"mx-2 text-green-400 hover:text-green-400 cursor-pointer":"mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
+            className={window.location.pathname == "/" ? "mx-2 text-green-400 hover:text-green-400 cursor-pointer" : "mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
           >
             Home
           </a>
@@ -66,7 +61,7 @@ function Header() {
             onClick={() => {
               navigate("/blogs");
             }}
-            className={window.location.pathname=="/blogs"?"mx-2 text-green-400 hover:text-green-400 cursor-pointer":"mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
+            className={window.location.pathname == "/blogs" ? "mx-2 text-green-400 hover:text-green-400 cursor-pointer" : "mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
           >
             All Blogs
           </a>
@@ -74,7 +69,7 @@ function Header() {
             onClick={() => {
               navigate("/myBlogs");
             }}
-            className={window.location.pathname=="/myBlogs"?"mx-2 text-green-400 hover:text-green-400 cursor-pointer":"mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
+            className={window.location.pathname == "/myBlogs" ? "mx-2 text-green-400 hover:text-green-400 cursor-pointer" : "mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
           >
             My Blogs
           </a>
@@ -82,7 +77,7 @@ function Header() {
             onClick={() => {
               navigate("/createblog");
             }}
-            className={window.location.pathname=="/createblog"?"mx-2 text-green-400 hover:text-green-400 cursor-pointer":"mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
+            className={window.location.pathname == "/createblog" ? "mx-2 text-green-400 hover:text-green-400 cursor-pointer" : "mx-2 text-gray-400 hover:text-green-400 cursor-pointer"}
           >
             Create Blog
           </a>
@@ -107,54 +102,54 @@ function Header() {
               <a className="text-white bg-red-400 px-2 py-1 rounded-full float-right mr-2">X</a>
             </div>
             <div className="mb-2 mt-12">
-            <a
-              onClick={() => {
-                navigate("/");
-              }}
-              className="mx-2 text-white hover:text-white cursor-pointer mb-2 closer-menu"
-            >
-              Home
-            </a>
+              <a
+                onClick={() => {
+                  navigate("/");
+                }}
+                className="mx-2 text-white hover:text-white cursor-pointer mb-2 closer-menu"
+              >
+                Home
+              </a>
             </div>
             <div className="mb-2">
-            <a
-              onClick={() => {
-                navigate("/blogs");
-              }}
-              className="mx-2 text-white hover:text-white cursor-pointer closer-menu"
-            >
-              All Blogs
-            </a>
+              <a
+                onClick={() => {
+                  navigate("/blogs");
+                }}
+                className="mx-2 text-white hover:text-white cursor-pointer closer-menu"
+              >
+                All Blogs
+              </a>
             </div>
             <div className="mb-2">
-            <a
-              onClick={() => {
-                navigate("/myBlogs");
-              }}
-              className="mx-2 text-white hover:text-white cursor-pointer closer-menu"
-            >
-              My Blogs
-            </a>
+              <a
+                onClick={() => {
+                  navigate("/myBlogs");
+                }}
+                className="mx-2 text-white hover:text-white cursor-pointer closer-menu"
+              >
+                My Blogs
+              </a>
             </div>
             <div className="mb-2">
-            <a
-              onClick={() => {
-                navigate("/createblog");
-              }}
-              className="mx-2 text-white hover:text-white cursor-pointer closer-menu"
-            >
-              Create Blog
-            </a>
+              <a
+                onClick={() => {
+                  navigate("/createblog");
+                }}
+                className="mx-2 text-white hover:text-white cursor-pointer closer-menu"
+              >
+                Create Blog
+              </a>
             </div>
             <div className="mb-2">
-            <a
-              onClick={() => {
-                logoutFunction()
-              }}
-              className="mx-2 px-1 border-white py-1 rounded-md text-white hover:bg-white hover:text-green-500 cursor-pointer closer-menu"
-            >
-              Log Out
-            </a>
+              <a
+                onClick={() => {
+                  logoutFunction()
+                }}
+                className="mx-2 px-1 border-white py-1 rounded-md text-white hover:bg-white hover:text-green-500 cursor-pointer closer-menu"
+              >
+                Log Out
+              </a>
             </div>
           </div>
         </div>

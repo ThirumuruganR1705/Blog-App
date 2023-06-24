@@ -5,14 +5,12 @@ import Cards from "../Components/Cards";
 import Header from "../Components/Header";
 import newContext from "../Context/newContext";
 import "../Styles.css/loader.css";
-import {useMemo} from "react";
 
 function MyBlogs() {
   let navigator = useNavigate();
   let value = useContext(newContext);
   let { email, setEmail, blogid, setBlogid } = value;
   let [myblogs, setMyblogs] = useState([]);
-  let array = [];
   let [uid, setUid] = useState("");
   let [loadFlag, setLoadFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +18,6 @@ function MyBlogs() {
   const functionLoader = (ele) => {
     setLoadFlag(ele);
   };
-
-  // setMyblogs(array);
 
   let getmyBlogs = async () => {
     setIsLoading(true);
@@ -31,19 +27,14 @@ function MyBlogs() {
         email,
       }
     );
-    console.log(data.data.message);
     setMyblogs(data.data.message);
     setIsLoading(false);
   };
-
-  const memo = useMemo(()=>getmyBlogs,[email])
 
   if (loadFlag) {
     getmyBlogs();
     setLoadFlag(false);
   }
-
-  console.log(myblogs.length);
 
   return (
     <div className="h-screen w-screen">
@@ -51,7 +42,6 @@ function MyBlogs() {
         <Header />
       </div>
       <div className={isLoading ? "h-3/5" : "myBlogs"}>
-        <div className="title">{/* <p className="text-xl">My Blogs</p> */}</div>
         <div
           className={
             isLoading ? "h-full flex justify-center items-center " : "myblogs "
@@ -113,4 +103,4 @@ function MyBlogs() {
   );
 }
 
-export default React.memo(MyBlogs);
+export default MyBlogs;

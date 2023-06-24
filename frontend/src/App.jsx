@@ -1,13 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Provider } from "react-redux";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Header from "./Components/Header";
 import Login from "./Pages/Login";
 import AllBlogs from "./Pages/AllBogs";
 import Home from "./Pages/Home";
 import MyBlogs from "./Pages/MyBlogs";
-import { Store } from "./Store/index";
 import { useSelector } from "react-redux";
 import BlogCreation from "./Pages/BlogCreation";
 import newContext from "./Context/newContext";

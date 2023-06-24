@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import img from "../Images/login.png";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../Store";
@@ -13,7 +12,7 @@ function Login() {
   let { email, setEmail, blogid, setBlogid } = value;
   let [regFlag, setRegFlag] = useState(false);
   let [spinFlag, setSpinFlag] = useState(false);
-  const [cookie, setCookie,removeCookie] = useCookies(['user']);
+  const [cookie, setCookie, removeCookie] = useCookies(['user']);
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let [inputs, setInputs] = useState({
@@ -93,13 +92,6 @@ function Login() {
   return (
     <React.Fragment>
       <div className="">
-        {/* {spinFlag && (
-          <div className="absolute h-screen w-screen bg-white flex items-center justify-center">
-            <div className="spinner-container">
-              <div className="loading-spinner"></div>
-            </div>
-          </div>
-        )} */}
         <div className="flex justify-center items-center bg-green-200 h-screen">
           <div className="w-80 h-80 bg-white shadow-md rounded-md">
             <div className="title text-center pt-2 mt-5 pb-2 text-green-600 font-extrabold">

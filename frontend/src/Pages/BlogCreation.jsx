@@ -16,8 +16,6 @@ function BlogCreation() {
   const [file, setFile] = useState({});
   const inputref = useRef();
   const navigator = useNavigate();
-  console.log(value);
-  console.log(email);
 
   let [inputs, setInputs] = useState({
     title: "",
@@ -34,7 +32,6 @@ function BlogCreation() {
     const storageRef = ref(storage, "/files/" + e.target.files[0].name);
     const uploadTask = uploadBytesResumable(storageRef, e.target.files[0]);
     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-      console.log(url);
       setInputs({ ...inputs, image: url });
     });
   }
@@ -47,22 +44,17 @@ function BlogCreation() {
   };
 
   let submitHandler = async () => {
-    console.log(inputs);
     setLoader(true);
     let userid = await axios.post("https://blog-app-liim.onrender.com/api/user/finduser", {
       email: email,
     }).catch((e) => { console.log(e) })
-    if (userid) {
-      console.log(userid.data.message);
-    }
     let res = await axios
       .post("https://blog-app-liim.onrender.com/api/blogs/create", {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
         user: userid.data.message,
-      })
-      .then(console.log("Blog Is Created"));
+      });
     setLoader(false);
     navigator("/blogs");
   };
